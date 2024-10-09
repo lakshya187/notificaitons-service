@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: Lambda Functions with SQS and EventBridge
+
+Resources:
+  NotificationQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: notification-service-dev
+      VisibilityTimeout: 200
+
+  NotificationSender:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: dist/functions/NotificationSender/handler.default
+      Runtime: nodejs20.x
+      Timeout: 180
+      Events:
+        SQSTrigger:
+          Type: SQS
+          Properties:
+            Queue: !GetAtt NotificationQueue.Arn
+            BatchSize: 10
+
+  ScheduledNotificationSender:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: dist/functions/ScheduledNotificationSender/handler.default
+      Runtime: nodejs20.x
+      Timeout: 180
+      Events:
+        EventBridgeRule:
+          Type: Schedule
+          Properties:
+            Schedule: rate(1 minute)

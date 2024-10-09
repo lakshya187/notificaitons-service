@@ -1,0 +1,10 @@
+version = 0.1
+[y.deploy.parameters]
+stack_name = "gw-lambda-stack"
+resolve_s3 = true
+s3_prefix = "gw-lambda-stack"
+region = "ap-south-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+disable_rollback = true
+image_repositories = []

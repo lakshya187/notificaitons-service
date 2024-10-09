@@ -1,0 +1,25 @@
+{
+  "name": "gw-lambdas",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "clean": "rm -rf dist",
+    "dev:NotificationSender": "sam local invoke NotificationSender",
+    "dev:ScheduledNotificationSender": "sam local invoke ScheduledNotificationSender",
+    "deploy": "sam deploy --guided"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.145",
+    "@types/node": "^22.7.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1691.0"
+  }
+}
