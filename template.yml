@@ -33,3 +33,9 @@ Resources:
           Type: Schedule
           Properties:
             Schedule: rate(1 minute)
+      Policies:
+        - Statement:
+            Effect: Allow
+            Action:
+              - sqs:SendMessage
+            Resource: !GetAtt NotificationQueue.Arn
